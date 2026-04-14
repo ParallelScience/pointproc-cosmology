@@ -1,0 +1,65 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Load the 10 galaxy and halo catalogs from the provided absolute paths.",
+                "Compute $R_{vir}$ analytically for each halo from $M_{vir}$ using the standard cosmological relation for mean matter density at $z=0$.",
+                "Match satellite galaxies to their host halos by matching the galaxy's `ln_M_h` (column 7) to the halo catalog's `M_vir` (column 6) within each realization.",
+                "Construct a master structured dataset containing host mass, derived $R_{vir}$, radial distance of satellites, and luminosity.",
+                "Pre-compute halo-mass-binned satellite counts and save the aggregated dataset to disk."
+            ],
+            "sub_task": "Data Aggregation and Halo-Galaxy Association",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Implement a Poisson-likelihood framework to model expected satellite counts $\\lambda(r | M, \\theta)$ as a function of halo mass and radial distance.",
+                "Pre-compute the integration of the model over the halo mass function using spline interpolation.",
+                "Perform maximum likelihood estimation (MLE) to recover HOD parameters ($M_{min}, \\alpha_{sat}$) by comparing forward-modeled counts to observed counts across all 10 realizations.",
+                "Compute confidence intervals for recovered parameters using variance between realizations.",
+                "Save the estimation results and parameter statistics to disk."
+            ],
+            "sub_task": "Forward Modeling and Likelihood-Based Parameter Estimation",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Generate diagnostic plots showing empirical satellite radial profiles per mass bin.",
+                "Overlay the best-fit exponential model onto these empirical profiles to allow visual assessment of fit quality.",
+                "Save these plots to disk for reference in the final report."
+            ],
+            "sub_task": "Diagnostic Visualization of Satellite Profiles",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Compute the marked correlation function $M(r)$ using luminosity as the mark, separately for the 1-halo ($r < 5$ Mpc/h) and 2-halo ($r > 10$ Mpc/h) regimes.",
+                "Normalize $M(r)$ by shuffling luminosity marks across existing galaxy positions to isolate spatial-luminosity correlations.",
+                "Plot the ratio $M(r)/M_{shuffled}(r)$ as a function of $r$ with error bands derived from the variance across the 10 realizations.",
+                "Save the marked correlation results and plots to disk."
+            ],
+            "sub_task": "Marked Correlation Function Analysis",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Compute log-likelihoods for both a constant-$\\alpha$ model and a mass-dependent concentration model.",
+                "Report delta-AIC values and interpret them using standard thresholds (e.g., $\\Delta AIC > 2$ as meaningful, $> 10$ as decisive).",
+                "Calculate and map residuals between observed 1-halo clustering and forward-modeled predictions in the transition region ($r \\approx 5$–10 Mpc/h).",
+                "Generate summary plots of the residuals and model comparison metrics."
+            ],
+            "sub_task": "Model Comparison and Residual Mapping",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Synthesize results from the likelihood estimation, marked correlation analysis, and residual mapping.",
+                "Interpret physical implications of recovered HOD parameters and spatial-luminosity correlations.",
+                "Discuss the validity of the Neyman-Scott kernel in describing the 1-halo to 2-halo transition.",
+                "Write the full Results section, including a summary table of recovered HOD parameters ($M_{min}, \\alpha_{sat}$) per realization vs. ground truth, delta-AIC values, and marked correlation ratios at key radial bins."
+            ],
+            "sub_task": "Statistical Aggregation and Final Reporting",
+            "sub_task_agent": "researcher"
+        }
+    ]
+}
