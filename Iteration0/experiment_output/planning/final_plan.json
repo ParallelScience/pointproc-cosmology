@@ -1,0 +1,76 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Load galaxy and halo catalogs for all 10 realizations.",
+                "Derive R_vir for each halo using the standard cosmological relation (M_vir proportional to R_vir^3).",
+                "Use a KD-Tree to match each galaxy to its nearest host halo, applying periodic boundary conditions.",
+                "Print summary statistics (number of matched galaxies, satellite fraction, mean halo mass per bin) to validate matching quality.",
+                "Save the matched dataset (galaxy-halo associations) for subsequent analysis."
+            ],
+            "sub_task": "Load the 10 galaxy and halo catalogs, derive R_vir, and perform spatial matching.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Partition host halos into logarithmic mass bins (M >= 10^13 M_sun/h).",
+                "Calculate satellite distances from host centers using the minimum image convention for periodic boundaries.",
+                "Compute the stacked radial density profile n(r|M_vir) by normalizing counts by shell volume (4*pi*r^2*dr).",
+                "Save the profiles and associated statistics for all mass bins."
+            ],
+            "sub_task": "Compute stacked radial density profiles n(r|M_vir) for satellite galaxies.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Fit the observed 3D satellite radial distributions to a PDF proportional to r^2 * exp(-r/lambda).",
+                "Generate a null model by shuffling satellite positions within host halos, preserving the number of satellites per halo and halo center positions.",
+                "Compare the goodness-of-fit of the exponential model against the null model and a Gaussian profile.",
+                "Save the fitted parameters and goodness-of-fit metrics."
+            ],
+            "sub_task": "Perform MLE to fit satellite radial distributions to a 3D exponential kernel and compare with a null model.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Compute the 2PCF using the Landy-Szalay estimator with a random catalog at least 10x larger than the data.",
+                "Apply periodic boundary conditions in pair counting.",
+                "Label galaxies by type (central vs. satellite) before pair counting to isolate \"central-satellite\" and \"satellite-satellite\" contributions.",
+                "Save the 2PCF components and covariance matrices."
+            ],
+            "sub_task": "Isolate the 1-halo regime (r < 5 Mpc/h) and compute the 2PCF.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Compute M(r) for the full satellite population as a baseline.",
+                "Compute M(r) within narrow host halo mass bins to control for mass-luminosity relations.",
+                "Define M(r) as the ratio of mark-weighted pair counts to unweighted pair counts, normalized by the mean mark squared.",
+                "Save the marked correlation results."
+            ],
+            "sub_task": "Compute the marked correlation function M(r) using luminosity as a mark.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Aggregate radial profiles, 2PCF components, and marked correlation functions across all 10 realizations.",
+                "Compute both diagonal errors and the full covariance matrix for all spatial statistics.",
+                "Calculate chi^2 statistics using the inverse of the covariance matrix for model fits.",
+                "Generate plots: stacked radial profiles with model fits, 1-halo 2PCF components with error bars, and marked correlation functions.",
+                "Save all plots as high-resolution PNG files and save the covariance matrices to disk."
+            ],
+            "sub_task": "Aggregate results, compute covariance matrices, and generate final plots.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Report key numerical results: fitted scale parameters (lambda/R_vir) with uncertainties, chi^2/dof for model comparisons, and amplitude ratios of 2PCF components.",
+                "Interpret the performance of the exponential kernel model and the impact of luminosity marks on spatial clustering.",
+                "Discuss whether systematic trends in the fitted scale parameter with halo mass indicate biases in the HOD spatial implementation.",
+                "Provide a final assessment of the HOD spatial implementation based on the aggregated statistics."
+            ],
+            "sub_task": "Synthesize the findings into a comprehensive results report.",
+            "sub_task_agent": "researcher"
+        }
+    ]
+}
