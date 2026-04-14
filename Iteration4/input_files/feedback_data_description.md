@@ -1,0 +1,5 @@
+The observed failures in the analysis are directly attributable to a constraint/error in the dataset description's "Data Generating Process."
+
+- **Constraint:** The description states that satellite positions are "drawn from exponential radial profile with scale R_vir."
+- **Limitation:** The analysis reveals that the data generation process failed to include the necessary spherical Jacobian determinant ($r^2$) when sampling the radial coordinate from the 1D exponential distribution. This resulted in an unphysical $r^{-2}$ density cusp at the center of every halo rather than the intended $\rho(r) \propto \exp(-r/R_{vir})$ profile.
+- **Affected Conclusions:** This constraint invalidates the use of standard analytical HOD profiles (like the intended exponential or NFW models) for small-scale spatial statistics ($r < 5$ Mpc/h). It forces the use of empirical KDE models or phenomenological gNFW fits to compensate for the artificial inflation of the 1-halo clustering term, rendering the catalog unreliable for small-scale cosmological inference unless the specific $r_{limit} \approx 6.25$ Mpc/h threshold is respected.
