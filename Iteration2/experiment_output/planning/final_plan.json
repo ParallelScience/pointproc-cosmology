@@ -1,0 +1,66 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Load the halo_catalog and galaxy_catalog files for all 10 realizations.",
+                "Match satellite galaxies to their host halos using the ln_M_h field (column 7) in the galaxy catalog.",
+                "Calculate the radial distance of each satellite from its host halo center, normalized by the host's R_vir.",
+                "Compute the empirical mean density profile n(r|M_vir) and perform a Kolmogorov-Smirnov test against the theoretical exponential profile e^{-r/R_vir}.",
+                "Print the KS statistics (D-statistic and p-value) per realization and report the aggregated mean and standard deviation across all 10 realizations.",
+                "Save the empirical profiles and KS-test statistics to a file."
+            ],
+            "sub_task": "Empirical Satellite Density Profiling and KS-Test",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "For each realization, generate 20 synthetic sub-realizations using the actual halo positions as fixed parents.",
+                "Populate these parents with satellites using the HOD occupation probability and the exponential radial profile.",
+                "Compute the theoretical Void Probability Function P_0(r) using random sphere placement (5000 random sphere centers) for 20 log-spaced radii in the range [1, 30] Mpc/h.",
+                "Save the resulting theoretical VPFs to a file."
+            ],
+            "sub_task": "Monte Carlo Theoretical VPF Construction",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Compute the empirical VPF P_0(r) from the actual galaxy catalogs and subtract the Monte Carlo-derived theoretical VPF to isolate residual leakage.",
+                "Decompose the residual VPF by halo mass bins to identify mass-dependent deviations.",
+                "Implement an Inhomogeneous Strauss Process for the 1-halo regime (r < 5 Mpc/h) with interaction radius R = 1 Mpc/h.",
+                "Estimate the interaction parameter gamma via pseudo-likelihood over a grid of values [0.1, 1.0] in steps of 0.1.",
+                "Save the residuals, mass-bin decompositions, and gamma parameters for all realizations."
+            ],
+            "sub_task": "Residual VPF Analysis and Inhomogeneous Strauss Process Modeling",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Compute the marked correlation function M(r) for the 1-halo regime (r < 5 Mpc/h) as the ratio of luminosity-weighted pair counts to unweighted pair counts, normalized by the mean squared luminosity.",
+                "Calculate the Pearson correlation coefficient between the luminosity offset and the normalized satellite-centric distance per realization.",
+                "Construct a \"decoupled\" model for the 5–10 Mpc/h transition regime by randomly shuffling satellite positions across halos within 0.2 dex mass bins.",
+                "Compare the empirical 2PCF against this decoupled model and save all metrics and the sample covariance matrix across the 10 realizations."
+            ],
+            "sub_task": "Mass-Conditioned Marked Correlation and Transition Scale Analysis",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Generate a 2x3 grid of subplots: (1) empirical vs. theoretical satellite radial profiles per mass bin, (2) KS test D-statistics across realizations, (3) empirical vs. Monte Carlo VPF with residuals, (4) residual VPF decomposed by halo mass bin, (5) marked correlation function M(r) vs. r, and (6) empirical vs. decoupled 2PCF in the transition regime.",
+                "Ensure all plots include error bars representing the standard deviation across the 10 realizations.",
+                "Save the figure as a high-resolution PNG file."
+            ],
+            "sub_task": "Visualization of Spatial Statistics and Model Deviations",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Structure the report as a formal Results section with subsections: satellite profiling, VPF analysis, Strauss modeling, marked correlation, and transition scale.",
+                "Explicitly reference all numerical results (KS D-statistics, p-values, gamma estimates, Pearson correlation coefficients, VPF residuals, and 2PCF amplitude differences).",
+                "Cite all quantitative findings with their cross-realization mean and standard deviation.",
+                "Provide a definitive assessment of the HOD's spatial and luminosity implementation accuracy."
+            ],
+            "sub_task": "Results Synthesis and Model Validation Report",
+            "sub_task_agent": "researcher"
+        }
+    ]
+}
