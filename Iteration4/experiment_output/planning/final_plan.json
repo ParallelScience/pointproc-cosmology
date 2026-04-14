@@ -1,0 +1,68 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Load galaxy and halo catalogs for all 10 realizations.",
+                "Calculate the empirical 3D radial density profile \\rho(r) for satellite galaxies relative to their host halo centers.",
+                "Perform a non-parametric Kernel Density Estimation (KDE) of the radial satellite distribution to serve as an empirical null model.",
+                "Produce a diagnostic plot showing the empirical radial density profile alongside the theoretical exponential decay P(r) \\propto e^{-r/R_{vir}} and the Jacobian-corrected density \\rho(r) \\propto r^{-2} e^{-r/R_{vir}}, with panels for normalized radial distance r/R_{vir} stacked across all 10 realizations.",
+                "Print quantitative goodness-of-fit statistics (chi-squared and KS test p-values) comparing the empirical profile to each theoretical prediction.",
+                "Save the computed profiles, KDE model parameters, and diagnostic plots to disk."
+            ],
+            "sub_task": "Diagnostic Verification and Empirical Null Model Construction",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Calculate the full galaxy 2PCF using the Landy-Szalay estimator with a random catalog of at least 5x the galaxy count.",
+                "Compute the Void Probability Function (VPF) over sphere radii ranging from 1 to 30 Mpc/h.",
+                "Compute the residuals between the empirical 2PCF and the KDE-based synthetic model, expressed as fractional deviations (\\Delta\\xi / \\xi).",
+                "Print the fractional residuals numerically per bin to the console.",
+                "Save the VPF, 2PCF, and residual metrics to disk."
+            ],
+            "sub_task": "Refined 1-Halo Structural Analysis",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Compute the marked correlation function M(r) for both satellite-only pairs and all-galaxy pairs in the 1-halo regime (r < 5 Mpc/h) using luminosity as the mark.",
+                "Calculate the Spearman rank correlation coefficient and its p-value between the luminosity mark and the local satellite density (using k-th nearest neighbor distance) for each realization.",
+                "Print the Spearman coefficients and p-values to the console.",
+                "Save the marked correlation results to disk."
+            ],
+            "sub_task": "Luminosity-Dependent Marked Correlation",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Partition halos into mass bins (10^{13} < M < 10^{14} and M > 10^{14} M_\\odot/h).",
+                "Fit a Generalized NFW (gNFW) profile directly to the empirical satellite radial density profile using the normalized radial coordinate r/R_{vir}.",
+                "Report the best-fit inner slope \\gamma, scale radius R_s/R_{vir}, and reduced chi-squared for each mass bin.",
+                "Print these fit parameters clearly to the console.",
+                "Save the fitted gNFW parameters and goodness-of-fit statistics to disk."
+            ],
+            "sub_task": "Mass-Conditioned gNFW Profile Fitting",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Aggregate all metrics (KDE-residual amplitudes, marked correlation coefficients, and mass-binned gNFW fit parameters) across the 10 realizations.",
+                "Construct a sample covariance matrix for these metrics.",
+                "Generate a single comprehensive multi-panel summary figure (at least 6 subplots) consolidating: mean radial profiles with error bands, VPF comparison, marked correlation function, gNFW fits per mass bin, covariance matrix heatmap, and fractional 2PCF residuals.",
+                "Save the summary figure as a high-resolution PNG."
+            ],
+            "sub_task": "Statistical Significance and Summary Visualization",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Synthesize findings to assess the catalog's utility and the success of the gNFW-corrected model in recovering the 2PCF at small scales.",
+                "Explicitly quantify and report the scale r_{limit} (in Mpc/h) where fractional 2PCF residuals exceed a 10% threshold.",
+                "Discuss whether the exponential satellite profile or the gNFW profile better describes the data, referencing the chi-squared values and Spearman coefficients from previous steps.",
+                "Write the full Results section of the report, including interpretations of the plots and key statistics."
+            ],
+            "sub_task": "Model Utility Assessment and Results Reporting",
+            "sub_task_agent": "researcher"
+        }
+    ]
+}
