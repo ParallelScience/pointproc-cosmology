@@ -1,0 +1,96 @@
+
+###### PROMPT BEGINS ########
+Human: You are a scientific paper classifier. Your task is to determine the most appropriate top-level arXiv archive for the following paper.
+
+**Paper Title:** Constraining Satellite Galaxy Radial Profiles with a Mass-Conditioned Spatial Point Process Model
+
+**Abstract:** Traditional summary statistics, such as the two-point correlation function, obscure the rich, mass-dependent structure of galaxy halos by averaging over their internal properties. We present a framework that bypasses this information loss by directly modeling the three-dimensional positions of galaxies as a mass-conditioned spatial point process. Applying a Neyman-Scott process model to a suite of ten synthetic galaxy catalogs, we perform a maximum likelihood estimation to recover the underlying Halo Occupation Distribution (HOD) parameters that govern satellite populations. Our model recovers the input HOD parameters with a small, well-understood systematic bias. Using the Akaike Information Criterion for model selection, we find decisive evidence that the satellite radial concentration increases with host halo mass, revealing a subtle break in the self-similarity of halo structure. Furthermore, by employing a marked correlation function with luminosity as the mark, we quantify the spatial segregation within halos, finding that more luminous galaxies are preferentially located near halo centers. A residual analysis precisely quantifies the breakdown of the 1-halo model at scales of 5-10 Mpc/h, where inter-halo clustering becomes the dominant contribution. This work demonstrates that direct likelihood-based modeling of spatial point patterns can extract detailed astrophysical information from galaxy catalogs, providing a powerful alternative to traditional summary statistics for analyzing next-generation cosmological surveys.
+
+**Archives:**
+- astro-ph: Astrophysics — cosmology, galaxies, stellar physics, planetary science, high-energy astrophysics, instrumentation
+- cond-mat: Condensed Matter — materials science, superconductivity, quantum gases, soft matter, statistical mechanics
+- cs: Computer Science — AI, machine learning, NLP, computer vision, algorithms, networking, security, software
+- econ: Economics — econometrics, general economics, theoretical economics
+- eess: Electrical Engineering and Systems Science — signal processing, image/video processing, audio/speech, control
+- gr-qc: General Relativity and Quantum Cosmology — gravitational physics, gravitational waves, black holes
+- hep-ex: High Energy Physics - Experiment — particle physics experiments, collider results
+- hep-lat: High Energy Physics - Lattice — lattice field theory, lattice QCD
+- hep-ph: High Energy Physics - Phenomenology — theoretical particle physics connected to experiment
+- hep-th: High Energy Physics - Theory — string theory, quantum field theory, supersymmetry
+- math: Mathematics — algebra, geometry, topology, analysis, probability, number theory, optimization
+- math-ph: Mathematical Physics — mathematical methods for physics problems
+- nlin: Nonlinear Sciences — chaos, pattern formation, solitons, integrable systems, self-organization
+- nucl-ex: Nuclear Experiment — experimental nuclear physics
+- nucl-th: Nuclear Theory — nuclear structure theory, hadron models, neutron stars
+- physics: Physics (General) — classical, computational, fluid dynamics, optics, plasma, applied, biological, chemical physics
+- q-bio: Quantitative Biology — biomolecules, genomics, neuroscience, populations, quantitative methods
+- q-fin: Quantitative Finance — computational finance, portfolio management, risk, pricing, trading
+- quant-ph: Quantum Physics — quantum information, computation, entanglement, foundations, optics
+- stat: Statistics — methodology, applications, machine learning (with statistical grounding), computation
+
+Select the single most appropriate archive for this paper. If the paper spans multiple fields, choose the one where the paper makes its primary contribution.
+
+###### PROMPT ENDS ########
+
+archive='astro-ph' justification='The paper focuses on galaxy halo structure, satellite galaxy distributions, and cosmological surveys, which are core topics within astrophysics.'
+###### PROMPT BEGINS ########
+Human: You are a scientific paper classifier. You have already determined that this paper belongs to the **astro-ph** archive on arXiv. Now select the specific subcategory.
+
+**Paper Title:** Constraining Satellite Galaxy Radial Profiles with a Mass-Conditioned Spatial Point Process Model
+
+**Abstract:** Traditional summary statistics, such as the two-point correlation function, obscure the rich, mass-dependent structure of galaxy halos by averaging over their internal properties. We present a framework that bypasses this information loss by directly modeling the three-dimensional positions of galaxies as a mass-conditioned spatial point process. Applying a Neyman-Scott process model to a suite of ten synthetic galaxy catalogs, we perform a maximum likelihood estimation to recover the underlying Halo Occupation Distribution (HOD) parameters that govern satellite populations. Our model recovers the input HOD parameters with a small, well-understood systematic bias. Using the Akaike Information Criterion for model selection, we find decisive evidence that the satellite radial concentration increases with host halo mass, revealing a subtle break in the self-similarity of halo structure. Furthermore, by employing a marked correlation function with luminosity as the mark, we quantify the spatial segregation within halos, finding that more luminous galaxies are preferentially located near halo centers. A residual analysis precisely quantifies the breakdown of the 1-halo model at scales of 5-10 Mpc/h, where inter-halo clustering becomes the dominant contribution. This work demonstrates that direct likelihood-based modeling of spatial point patterns can extract detailed astrophysical information from galaxy catalogs, providing a powerful alternative to traditional summary statistics for analyzing next-generation cosmological surveys.
+
+**Methods (if available):** \subsection{Dataset}
+The analysis is performed on a suite of ten synthetic galaxy catalogs, generated from a known Halo Occupation Distribution (HOD) model. These catalogs provide the three-dimensional positions, luminosities, and host dark matter halo properties for each galaxy. For our analysis, we focus on the population of satellite galaxies residing in massive halos. The final aggregated dataset used for the likelihood estimation comprises over 68,000 satellite galaxies hosted by approximately 20,000 dark matter halos with virial masses $M_{\text{vir}} \ge 10^{13} M_\odot/h$. For each satellite galaxy, we compute its radial distance, $r$, from the center of its assigned host halo.
+
+\subsection{The Mass-Conditioned Spatial Point Process Model}
+We model the three-dimensional spatial distribution of satellite galaxies as a mass-conditioned Neyman-Scott process. In this framework, the centers of dark matter halos act as the ``parent'' points of the process, and the satellite galaxies are the ``offspring'' points distributed around them. The model is defined by two primary components: the mean number of satellites per halo and their spatial distribution.
+
+The mean number of satellite galaxies, $\langle N_{\text{sat}} \rangle$, within a halo of mass $M$ is described by a power-law relation characteristic of HOD models:
+\begin{equation}
+\langle N_{\text{sat}}(M) \rangle = \left( \frac{M}{M_{\text{sat}}} \right)^{\alpha_{\text{sat}}}
+\end{equation}
+where $M_{\text{sat}}$ is the characteristic mass scale for a halo to host one satellite, and $\alpha_{\text{sat}}$ is the power-law index.
+
+The spatial positions of these satellites relative to their host halo center are drawn from a radial probability density function, $f(r|M)$, which acts as the spatial kernel of the Neyman-Scott process. We model this kernel using an exponential profile, scaled by the halo's virial radius, $R_{\text{vir}}$:
+\begin{equation}
+f(r|M) \propto \exp\left(-\alpha_c(M) \frac{r}{R_{\text{vir}}}\right)
+\end{equation}
+where $\alpha_c(M)$ is a mass-dependent concentration parameter that dictates how centrally concentrated the satellites are. The full intensity function for satellites in a halo of mass $M$ is then given by $\lambda(r | M, \theta) = \langle N_{\text{sat}}(M) \rangle \cdot f(r|M)$, where $\theta$ is the set of model parameters $\{M_{\text{sat}}, \alpha_{\text{sat}}, \alpha_c(M)\}$.
+
+\subsection{Parameter Estimation and Model Selection}
+We infer the model parameters $\theta$ via Maximum Likelihood Estimation (MLE). The likelihood function is constructed from the positions of individual satellite galaxies, assuming they represent a Poisson point process conditioned on the observed halo population. To isolate the 1-halo regime and mitigate contamination from neighboring halos (the 2-halo term), we apply a hard radial cut, including only satellites with $r < 5$ Mpc/h in the likelihood calculation.
+
+We test two nested hypotheses for the satellite radial concentration. The first is a baseline model where the concentration is constant across all halo masses, i.e., $\alpha_c(M) = \alpha_0$. The second is a more complex model where the concentration is allowed to vary as a power-law of the host halo mass:
+\begin{equation}
+\alpha_c(M) = \alpha_0 \left( \frac{M}{M_{\text{pivot}}} \right)^{\beta}
+\end{equation}
+where we fix the pivot mass to $M_{\text{pivot}} = 10^{13} M_\odot/h$.
+
+To formally compare these two models, we employ the Akaike Information Criterion (AIC), defined as:
+\begin{equation}
+\text{AIC} = 2k - 2\ln(\mathcal{L})
+\end{equation}
+where $k$ is the number of free parameters in the model and $\mathcal{L}$ is the maximum value of the likelihood function. The model with the lower AIC value is preferred, with a difference $\Delta \text{AIC} > 10$ considered as decisive evidence in favor of the better-performing model.
+
+\subsection{Marked Correlation Function}
+To investigate the spatial segregation of galaxies as a function of their intrinsic properties, we employ a marked correlation function, using galaxy luminosity as the mark. The marked correlation function, $M(r)$, is defined as the mean product of the marks (luminosities) for all pairs of galaxies separated by a distance $r$.
+
+To isolate the correlation between spatial position and luminosity from the underlying spatial clustering of galaxies and the overall luminosity distribution, we normalize $M(r)$ by a shuffled counterpart, $M_{\text{shuffled}}(r)$. This shuffled function is computed by randomly reassigning the luminosity marks among the fixed observed galaxy positions and then recalculating the mean mark product for pairs at separation $r$. The ratio $M(r)/M_{\text{shuffled}}(r)$ provides a direct measure of luminosity segregation. A ratio greater than unity at a given scale indicates that galaxies separated by that distance tend to be more luminous than average, while a ratio less than unity indicates they are less luminous.
+
+\subsection{Residual Analysis}
+We evaluate the limitations of our 1-halo Neyman-Scott model by performing a residual analysis in the transition region between 1-halo and 2-halo dominance. We compare the observed number of galaxies, $O$, to the number expected by our best-fit model, $E$, in the radial range of $5 < r < 10$ Mpc/h. This region was excluded from the likelihood fit. The fractional residual, $(O-E)/E$, quantifies the model's breakdown. A large positive residual indicates a significant source of galaxy clustering not captured by the isolated halo model, namely the contribution from neighboring, correlated halos (the 2-halo term).
+
+**Available subcategories in astro-ph:**
+- astro-ph.CO: Cosmology and Nongalactic Astrophysics — Phenomenology of early universe, cosmic microwave background, cosmological parameters, primordial element abundances, extragalactic distance scale, large-scale structure of the universe, dark energy and dark matter.
+- astro-ph.EP: Earth and Planetary Astrophysics — Interplanetary medium, planetary physics, planetary astrobiology, extrasolar planets, solar system formation and evolution, comets, asteroids, meteors.
+- astro-ph.GA: Astrophysics of Galaxies — Phenomena pertaining to galaxies or the Milky Way. Star clusters, HII regions, interstellar medium, molecular clouds, galactic structure, formation and evolution.
+- astro-ph.HE: High Energy Astrophysical Phenomena — Cosmic ray production, acceleration, propagation, detection. Gamma ray astronomy. Supernovae, neutron stars, pulsars, black holes, X-ray binaries, active galactic nuclei.
+- astro-ph.IM: Instrumentation and Methods for Astrophysics — Detector and telescope design, experiment proposals, laboratory astrophysics, data analysis methods, statistical methods, software and simulations.
+- astro-ph.SR: Solar and Stellar Astrophysics — White dwarfs, brown dwarfs, cataclysmic variables. Star formation and protostellar systems. Stellar structure, evolution, nucleosynthesis, atmospheres. The Sun.
+
+Select one primary subcategory and up to 3 secondary subcategories (from any archive) that also apply. The primary must be from the list above. Secondary categories may come from any arXiv category if the paper is interdisciplinary.
+
+###### PROMPT ENDS ########
+
+primary_category='astro-ph.CO' secondary_categories=['astro-ph.GA', 'astro-ph.IM'] justification='The paper focuses on the large-scale structure of the universe, Halo Occupation Distribution (HOD) modeling, and dark matter halo properties, which are core topics in cosmology (astro-ph.CO). It also deals with galaxy formation and evolution (astro-ph.GA) and introduces a new statistical methodology for analyzing galaxy catalogs (astro-ph.IM).'

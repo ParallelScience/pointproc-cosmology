@@ -1,0 +1,8 @@
+{
+  "primary_category": "astro-ph.CO",
+  "secondary_categories": [
+    "astro-ph.GA",
+    "astro-ph.IM"
+  ],
+  "justification": "The paper focuses on the large-scale structure of the universe, Halo Occupation Distribution (HOD) modeling, and dark matter halo properties, which are core topics in cosmology (astro-ph.CO). It also deals with galaxy formation and evolution (astro-ph.GA) and introduces a new statistical methodology for analyzing galaxy catalogs (astro-ph.IM)."
+}

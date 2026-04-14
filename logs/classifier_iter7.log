@@ -1,0 +1,7 @@
+Classifier: Step 1 — Determining archive...
+  Archive: astro-ph — The paper focuses on galaxy halo structure, satellite galaxy distributions, and cosmological surveys, which are core topics within astrophysics.
+Classifier: Step 2 — Determining subcategory within 'astro-ph'...
+  Primary: astro-ph.CO
+  Secondary: astro-ph.GA, astro-ph.IM
+  Justification: The paper focuses on the large-scale structure of the universe, Halo Occupation Distribution (HOD) modeling, and dark matter halo properties, which are core topics in cosmology (astro-ph.CO). It also deals with galaxy formation and evolution (astro-ph.GA) and introduces a new statistical methodology for analyzing galaxy catalogs (astro-ph.IM).
+Classification completed in 0 min 3 sec. Cost: $0.0000
