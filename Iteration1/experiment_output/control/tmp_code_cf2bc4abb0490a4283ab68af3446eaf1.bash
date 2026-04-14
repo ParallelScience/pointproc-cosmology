@@ -1,0 +1,1 @@
+find /home/node/work/projects/pointproc_cosmology/data -maxdepth 1 -name "*.npy"

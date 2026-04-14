@@ -1,0 +1,89 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Load halo catalogs for all 10 realizations.",
+                "Implement a K-function estimator for periodic boxes.",
+                "Calculate the L-function to linearize the K-function.",
+                "Produce a plot comparing the mean L-function (averaged over all 10 realizations) against the CSR theoretical expectation L(r) - r = 0, with shaded uncertainty bands.",
+                "Print the mean and standard deviation of the L-function deviation at representative radii (10, 20, 50 Mpc/h).",
+                "Save the results to disk for subsequent analysis."
+            ],
+            "sub_task": "Compute Ripley’s K-function and L-function for the halo catalogs to characterize the parent process and compare against Complete Spatial Randomness (CSR).",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Implement a VPF estimator using random sphere placement.",
+                "Compute $P_0(r)$ for $r \\in [1, 30]$ Mpc/h.",
+                "Derive and overplot the theoretical Poisson VPF ($P_0(r) = \\exp(-n \\cdot \\frac{4}{3} \\pi r^3)$) alongside the empirical VPF.",
+                "Quantify the deviation between the empirical and Poisson VPF at each radius bin by computing a normalized residual.",
+                "Print these residuals explicitly to assess hierarchy leakage.",
+                "Save the empirical VPF values and the variance across realizations."
+            ],
+            "sub_task": "Compute the empirical VPF, $P_0(r)$, for the galaxy catalogs and compare against the theoretical Neyman-Scott and Poisson VPFs.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Filter galaxies to isolate satellites in massive halos.",
+                "Perform Strauss process likelihood estimation per-halo for each halo with at least 3 satellites.",
+                "Fit the repulsion radius $R$ and interaction parameter $\\gamma$ for each qualifying halo.",
+                "Save and print the distribution of fitted parameters across halos and realizations (mean, median, standard deviation of $R$ and $\\gamma$)."
+            ],
+            "sub_task": "Estimate interaction parameters for satellite-satellite pairs within host halos ($M > 10^{13} M_\\odot/h$).",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Calculate the mean luminosity as a function of normalized halo-centric distance ($r/R_{vir}$) separately for centrals and satellites.",
+                "Produce a plot showing these mean luminosity profiles.",
+                "Compute the Spearman rank correlation between luminosity and distance for each realization.",
+                "Print the Spearman correlation coefficient and its p-value for each realization, as well as the mean across realizations, distinguishing between central and satellite populations."
+            ],
+            "sub_task": "Test for spatial-mark independence by analyzing the luminosity mark $f(m|x)$ relative to halo-centric distance.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Compute $G(r)$ (nearest neighbor) and $F(r)$ (empty space) functions.",
+                "Generate a shuffled catalog by re-assigning satellite positions within their host halos.",
+                "Compute the J-function for both original and shuffled catalogs averaged over all 10 realizations with uncertainty bands.",
+                "Plot the J-functions and print the radius at which $J(r)$ first deviates significantly from 1 (the CSR expectation) for both catalogs."
+            ],
+            "sub_task": "Compute the J-function for the galaxy catalog and compare it against a shuffled (randomized) satellite distribution.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Load all intermediate results from previous steps.",
+                "Compute the mean and covariance (using Jackknife resampling) for VPF, K-function, J-function, and Gibbs parameters.",
+                "Produce a single multi-panel summary figure containing the mean K/L-function, VPF, J-function, and mark correlation profiles with jackknife error bars.",
+                "Print the full jackknife covariance matrix diagonal (variances) for each statistic."
+            ],
+            "sub_task": "Aggregate all computed statistics across the 10 realizations and compute robust covariance matrices.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Perform a regression analysis between VPF deviations and Strauss interaction parameters.",
+                "Print the Pearson and Spearman correlation coefficients between the VPF deviation metric and the Strauss $\\gamma$ parameter across realizations, along with their p-values.",
+                "Generate a scatter plot of these two quantities with a linear regression line."
+            ],
+            "sub_task": "Perform a joint analysis to correlate VPF \"leakage\" with Gibbs \"repulsion\" parameters.",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Structure the Results section with clearly labeled subsections: Halo Parent Process, VPF Hierarchy, Local Gibbs Analysis, Mark Independence, J-function, and Joint Analysis.",
+                "Explicitly reference all numerical values printed in previous steps (L-function deviations, VPF residuals, Spearman correlations, Strauss parameters, J-function crossing scales).",
+                "Interpret the results from the K-function, VPF, and J-function analyses.",
+                "Discuss the validity of the separable intensity model and the impact of luminosity marks.",
+                "Summarize the effective repulsion radii and the degree of hierarchy leakage.",
+                "Provide a comprehensive assessment of the galaxy distribution's complexity relative to the HOD model."
+            ],
+            "sub_task": "Write the full Results section of the report, synthesizing all findings and documenting the limitations of the Neyman-Scott assumption.",
+            "sub_task_agent": "researcher"
+        }
+    ]
+}
