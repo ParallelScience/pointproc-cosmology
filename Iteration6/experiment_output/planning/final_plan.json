@@ -1,0 +1,68 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Load the 10 galaxy and halo catalogs from the provided absolute paths.",
+                "Match each satellite galaxy to its host halo by finding the nearest halo center in 3D space (using a KD-tree or brute-force search) among halos whose virial mass matches the satellite's ln_M_h value within a small tolerance, accounting for periodic boundary conditions.",
+                "Compute and store the 3D offset vector (dx, dy, dz) and scalar radial distance r = |r_sat - r_halo| for each satellite.",
+                "Filter the data to isolate halos with M > 10^13 M_sun/h and satellites within the 1-halo regime (r < 5 Mpc/h).",
+                "Save the processed data as a structured NumPy array with fields: halo_mass, r_vir, r_sat, dx, dy, dz, ln_L, realization_id.",
+                "Print summary statistics: number of matched satellites per realization, number of halos above M_sat threshold, and mean number of satellites per qualifying halo."
+            ],
+            "sub_task": "Data Preparation and Halo-Satellite Partitioning",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Define 3 logarithmically spaced mass bins above M_sat = 10^13 M_sun/h.",
+                "Compute the empirical 3D radial density profile n(r|M_vir) normalized as a number density (satellites per unit volume shell) for each mass bin.",
+                "Calculate the mean and variance of these profiles across the 10 realizations.",
+                "Print bin populations and mean satellite counts per bin.",
+                "Save the resulting empirical profiles and their statistics to disk."
+            ],
+            "sub_task": "Empirical Radial Profile Extraction",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Implement the theoretical 1-halo satellite distribution model rho(r) proportional to r^-2 exp(-r / (alpha * R_vir)).",
+                "Fit the radial scale parameter alpha via MLE on individual satellite radial distances r/R_vir.",
+                "Separately fit M_min and alpha_sat by comparing observed mean satellite counts per halo mass bin against the HOD prediction N_sat(M) = (M/M_sat)^alpha_sat.",
+                "Print both sets of recovered parameters with uncertainties alongside ground-truth values.",
+                "Save the recovered parameters and model fit statistics."
+            ],
+            "sub_task": "Analytic Model Construction and Parameter Recovery",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Compute the marked correlation function M(r) = [sum(m_i * m_j * w(r_ij))] / [sum(w(r_ij))] where m_i = L_i / <L> are normalized luminosity marks and w(r_ij) is a pair-counting weight.",
+                "Compare M(r) against the unmarked 2PCF xi(r) within the 1-halo regime (r < 5 Mpc/h).",
+                "Quantify the deviation from unity using the ratio M(r)/[1 + xi(r)].",
+                "Save the marked correlation results and diagnostic statistics."
+            ],
+            "sub_task": "Marked Correlation Analysis",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Calculate residuals between observed 1-halo clustering and the analytic model.",
+                "Aggregate all results across the 10 realizations to define confidence intervals.",
+                "Generate a single multi-panel figure containing: (a) empirical radial profiles per mass bin with best-fit models, (b) M(r) vs. 1+xi(r), (c) radial profile residuals, and (d) a summary table of recovered vs. ground-truth HOD parameters.",
+                "Save all final numerical results and the multi-panel plot."
+            ],
+            "sub_task": "1-Halo Residual Analysis and Statistical Aggregation",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Synthesize findings from empirical radial profiles and analytic model fits.",
+                "Interpret the impact of the luminosity mark on spatial clustering statistics, referencing the M(r)/[1 + xi(r)] ratio.",
+                "Discuss limitations of the Neyman-Scott kernel based on 1-halo residual analysis.",
+                "Write the full Results section, including recovered values of alpha, M_min, alpha_sat (with mean/std), chi-squared/log-likelihood values, amplitude/scale of M(r) deviations, and quantitative residual amplitude, referencing each subplot panel (a-d) by letter."
+            ],
+            "sub_task": "Results Interpretation and Reporting",
+            "sub_task_agent": "researcher"
+        }
+    ]
+}
