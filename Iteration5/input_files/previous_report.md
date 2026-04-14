@@ -79,18 +79,19 @@ Iteration 3:
 
 Iteration 4:
 **Methodological Evolution**
-- **Diagnostic Shift:** The research plan transitioned from a standard HOD validation to a forensic structural analysis of the coordinate sampling algorithm.
-- **Analytical Additions:** Introduced a "Missing Jacobian" diagnostic test, comparing the empirical 3D radial density against the theoretical $P(r) \propto r^2 \exp(-r/R_{vir})$ PDF.
-- **Modeling Strategy:** Implemented a non-parametric Kernel Density Estimation (KDE) null model to isolate the 1-halo structural anomaly from global clustering.
-- **Refinement:** Replaced standard analytical HOD profile fitting with a Generalized NFW (gNFW) phenomenological correction to quantify the extent of the coordinate sampling error.
+- **Shift to Empirical Diagnostic Framework:** The research strategy transitioned from standard HOD validation to a forensic diagnostic analysis of the data generating process.
+- **Introduction of Null Modeling:** A non-parametric Kernel Density Estimation (KDE) model was implemented as a baseline to isolate structural anomalies from the intended HOD physics.
+- **Coordinate Transformation Audit:** The methodology was updated to include a formal Jacobian-corrected density profile test, replacing the assumption of a standard 3D exponential distribution.
+- **Mass-Conditioned gNFW Fitting:** A Generalized NFW (gNFW) profile was introduced as a phenomenological correction to quantify the extent of the observed spatial bias.
 
 **Performance Delta**
-- **Baseline Regression:** The catalog's 1-halo spatial statistics are fundamentally compromised. The intended exponential radial profile is mathematically inconsistent with the generated 3D coordinates, resulting in a catastrophic $\chi^2$ fit ($> 6 \times 10^6$) for the theoretical model.
-- **Robustness Threshold:** Established a hard reliability limit, $r_{limit} \approx 6.25$ Mpc/h. Below this scale, the 2PCF is dominated by an unphysical $r^{-2}$ density cusp.
-- **Improvement:** The KDE null model successfully recovered the empirical 2PCF and VPF, providing a robust, albeit empirical, description of the data that the original HOD-based analytical models failed to capture.
+- **Identification of Systematic Error:** The analysis revealed a critical "Missing Jacobian" error in the satellite placement algorithm, causing an unphysical $r^{-2}$ density cusp.
+- **Quantitative Regression:** The standard 3D exponential model, previously assumed to be the ground truth, was proven invalid, yielding a catastrophic $\chi^2 \approx 6.8 \times 10^6$.
+- **Reliability Threshold Established:** A new metric, $r_{limit} \approx 6.25$ Mpc/h, was defined. Below this scale, the 2PCF is contaminated by the sampling error; above this scale, the catalog remains robust for cosmological inference.
+- **Improved Interpretability:** The use of the KDE null model successfully disentangled the 1-halo structural anomaly from the 2-halo clustering, providing a precise quantification of the bias that was previously obscured by global summary statistics.
 
 **Synthesis**
-- **Causal Attribution:** The observed small-scale clustering bias is directly attributed to the omission of the Jacobian determinant ($r^2$ volume element) during the spherical coordinate sampling of satellite galaxies.
-- **Validity and Limits:** The catalog is invalid for standard HOD-based small-scale cosmological inference ($r < 6.25$ Mpc/h). However, the 2-halo clustering term remains physically sound, as the parent Neyman-Scott process was unaffected by the satellite-level sampling error.
-- **Direction:** Future research must either apply the derived empirical KDE correction for small-scale studies or restrict all cosmological parameter estimation to the 2-halo regime ($r > 6.25$ Mpc/h). The identified "assembly bias"—a correlation between luminosity and local density—is a persistent feature of the HOD parameterization that must be accounted for in any future marked point process modeling.
+- **Causal Attribution:** The observed small-scale clustering bias is directly attributed to the omission of the spherical volume element (Jacobian) during the sampling of satellite radial coordinates.
+- **Validity and Limits:** The catalog is fundamentally flawed for small-scale ($r < 6.25$ Mpc/h) HOD studies if standard analytical profiles are used. The gNFW fit acts as an effective, albeit non-physical, correction that absorbs the sampling error.
+- **Research Direction:** Future work must either apply the empirical KDE null model to correct for the 1-halo bias or restrict all cosmological inference to the 2-halo regime ($r > 6.25$ Mpc/h). The strong positive correlation between luminosity and local density (assembly bias) confirms that the HOD implementation successfully captures mass-dependent satellite luminosity, even if the spatial distribution is corrupted.
         

@@ -1,12 +1,11 @@
-**Title: Empirical Correction and Cross-Scale Calibration of the 1-Halo/2-Halo Transition**
+**Title: Correcting the 1-Halo Spatial Bias via Jacobian-Weighted Kernel Density Estimation (KDE) Re-weighting**
 
-Given that the previous iterations have definitively identified a "missing Jacobian" error in the satellite radial sampling (resulting in an unphysical $r^{-2}$ cusp at $r < 6.25$ Mpc/h), the current HOD model is fundamentally biased at small scales. Instead of attempting to "fix" the HOD parameters, we propose to treat the synthetic catalog as a **non-stationary point process with a known structural defect**. 
+The previous iterations have established that the synthetic galaxy catalog suffers from a systematic "Missing Jacobian" error, where satellite positions were sampled from a 1D exponential distribution rather than a 3D volume-weighted distribution, resulting in an unphysical $r^{-2}$ density cusp and a 1-halo spatial bias below $r \approx 6.25$ Mpc/h. 
 
-**Hypothesis:** The "leakage" of 1-halo structural anomalies into the 2-halo regime ($r > 6.25$ Mpc/h) can be modeled as a scale-dependent bias function, $B(r) = \xi_{obs}(r) / \xi_{theory}(r)$, which acts as a transfer function between the corrupted small-scale distribution and the valid large-scale clustering. 
+**Hypothesis:** We hypothesize that the 1-halo spatial bias is a deterministic, coordinate-dependent transformation of the intended HOD model. By calculating the ratio between the empirical radial density profile $n_{emp}(r|M_{vir})$ (derived from the current catalog) and the theoretical target profile $n_{theo}(r|M_{vir}) \propto r^2 \exp(-r/R_{vir})$, we can derive a spatially-dependent weight function $w(r) = n_{theo}/n_{emp}$. 
 
-**Proposed Methodology:**
-1. **Empirical Transfer Function:** Compute the ratio between the observed 2PCF and the theoretical 2PCF (derived from the analytical HOD) across the 1-halo/2-halo transition zone. 
-2. **Deconvolution:** Use the previously validated KDE null model to "deconvolve" the satellite distribution from the parent halo distribution. We will test if the 2-halo clustering term can be recovered by subtracting the KDE-derived 1-halo contribution from the total 2PCF, effectively isolating the "pure" 2-halo signal from the sampling-corrupted 1-halo signal.
-3. **Validation:** Use the Void Probability Function (VPF) as a cross-check; if the deconvolution is successful, the VPF of the "cleaned" catalog should converge to the Poisson-expectation of the parent halo process at scales $r > 10$ Mpc/h. 
-
-This approach shifts the research goal from "validating the HOD" to "recovering cosmological information from a corrupted dataset," allowing us to utilize the full catalog for large-scale analysis despite the microscopic sampling error.
+**Proposed Method:**
+1. **Profile Mapping:** Compute the empirical 3D radial profile for satellites in mass-binned halos to quantify the exact deviation from the target exponential profile.
+2. **Weighting Function:** Construct a non-parametric weight function $w(r)$ that maps the observed "cuspy" distribution back to the intended "exponential" distribution.
+3. **Corrected Statistics:** Apply this weight function to the Landy-Szalay 2PCF estimator and the VPF calculation. Instead of treating all galaxies as equal, we will assign each satellite a weight $w(r_i)$ based on its distance from the host halo center.
+4. **Validation:** If the hypothesis holds, the weighted 2PCF and VPF should recover the expected theoretical clustering signal (the "true" HOD signal) even within the $r < 6.25$ Mpc/h regime, effectively "de-biasing" the catalog without requiring new data generation. This will demonstrate that the 1-halo structural anomaly is a reversible coordinate transformation rather than a fundamental loss of information.

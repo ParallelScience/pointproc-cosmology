@@ -1,15 +1,15 @@
 Searching for problems in the data description...
-Providing feedback to improve results...Summarizing learning...
-
+Providing feedback to improve results...
+Summarizing learning...
 Reasoning whether this iteration is better than previous one...
- |  done 29637 892 [0m 2s]
+ |  done 19265 591 [0m 2s]
 Best Analysis obtained in current iteration
- |  done 29637 1114 [0m 2s]
- |  done 29637 1488 [0m 3s]
- |  done 29637 1764 [0m 5s]
-Thinking in new ideas/hypotheses...Reasoning whether a new iteration is needed...
-
+ |  done 29637 1525 [0m 4s]
+ |  done 29637 1707 [0m 4s]
+ |  done 29637 1799 [0m 5s]
+Thinking in new ideas/hypotheses...
+Reasoning whether a new iteration is needed...
+ |  done 46358 2593 [0m 9s]
 Decision: iterate
- |  done 46329 2135 [0m 8s]
- |  done 46329 2460 [0m 10s]
-Evaluation done in 0 min 10 sec. Cost: $0.047
+ |  done 46358 2610 [0m 9s]
+Evaluation done in 0 min 9 sec. Cost: $0.046
