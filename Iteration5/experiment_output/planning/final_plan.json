@@ -1,0 +1,80 @@
+{
+    "sub_tasks": [
+        {
+            "bullet_points": [
+                "Load the 10 realizations of galaxy and halo catalogs.",
+                "Compute $R_{vir}$ for each halo from $M_{vir}$ assuming mean matter density at $z=0$.",
+                "Create a lookup table mapping every satellite to its parent halo's center and $R_{vir}$ using spatial proximity and the `ln_M_h` field.",
+                "Print summary statistics (number of satellites matched, fraction unmatched, mean satellites per halo) to validate association quality.",
+                "Save the processed association data to disk."
+            ],
+            "sub_task": "Data Pre-processing and Halo-Galaxy Association",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Calculate $\\xi_{hh}(r)$ and $\\xi_{gh}(r)$ using a Landy-Szalay estimator with a random catalog of the same volume.",
+                "Compute bias $b(M)$ in 3 logarithmically spaced mass bins above $M_{sat} = 10^{13} M_\\odot/h$.",
+                "Print per-bin bias values and their variance across the 10 realizations.",
+                "Save the bias estimates and correlation functions to disk."
+            ],
+            "sub_task": "Large-Scale Bias Estimation",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Compute 3D $P(k)$ for galaxies and halos using a $256^3$ CIC grid.",
+                "Subtract shot noise ($1/\\bar{n}$) from both spectra.",
+                "Compare $P_{hh}(k)$ against theoretical $P_{lin}(k)$ scaled by halo bias.",
+                "Print the $k$-range where galaxy $P(k)$ exceeds shot noise by a factor of 2."
+            ],
+            "sub_task": "Power Spectrum Validation",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Create \"shuffled\" catalogs by randomizing satellite angular positions while keeping centrals fixed at halo centers and preserving radial distances.",
+                "Perform a KS-test comparing radial distance distributions before and after shuffling to confirm correctness.",
+                "Save the shuffled catalogs to disk."
+            ],
+            "sub_task": "Assembly Bias Isolation via Shuffling",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Compute marked correlation $M(r)$ using luminosity relative to the mean luminosity of galaxies in the same halo mass bin.",
+                "Compare $M(r)$ for original vs. shuffled catalogs in the 1-halo regime ($r < 5$ Mpc/h).",
+                "Produce a plot comparing $M(r)$ with error bands from the 10 realizations."
+            ],
+            "sub_task": "Marked Correlation Analysis",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Decompose the 2PCF into central-satellite, satellite-satellite, and central-central pair contributions using the `is_central` flag and association table.",
+                "Produce a plot showing each contribution separately across the full $r$ range."
+            ],
+            "sub_task": "2PCF Decomposition",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Calculate empirical 3D radial density profiles $\\rho(r)$ for satellites in 3 mass bins above $M_{sat}$.",
+                "Fit an exponential profile $\\exp(-r/r_{scale})$ to each bin and report $r_{scale}/R_{vir}$ with bootstrap uncertainties.",
+                "Generate a multi-panel figure showing radial profiles per mass bin vs. theoretical predictions.",
+                "Aggregate all bias, power spectrum, and correlation metrics across realizations."
+            ],
+            "sub_task": "Radial Profile Diagnostic and Statistical Aggregation",
+            "sub_task_agent": "engineer"
+        },
+        {
+            "bullet_points": [
+                "Synthesize results to define the \"Reliability Threshold\" for the dataset.",
+                "Document the range of scales ($r > r_{limit}$) and specific statistics where the catalog is robust for cosmological inference.",
+                "Write the full Results section of the report, interpreting all plots and statistics, and discussing the validity of the HOD spatial implementation."
+            ],
+            "sub_task": "Final Results Reporting",
+            "sub_task_agent": "researcher"
+        }
+    ]
+}

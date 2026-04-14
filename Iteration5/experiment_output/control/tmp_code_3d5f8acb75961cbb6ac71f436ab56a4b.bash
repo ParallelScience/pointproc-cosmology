@@ -1,0 +1,1 @@
+ls -R /home/node/work/projects/pointproc_cosmology/data/ && cat /home/node/work/projects/pointproc_cosmology/Iteration5/experiment_output/control/codebase/step_3.py
