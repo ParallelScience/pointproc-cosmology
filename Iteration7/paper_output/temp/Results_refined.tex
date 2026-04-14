@@ -1,0 +1,61 @@
+\documentclass[]{article}
+
+\usepackage{amsmath}
+\usepackage{multirow}
+\usepackage{natbib}
+\usepackage{graphicx} 
+
+
+\begin{document}
+
+We present the results of our mass-conditioned spatial point process analysis, beginning with the recovery of the Halo Occupation Distribution (HOD) parameters. We then test for a mass-dependence in the satellite radial concentration and investigate luminosity segregation using a marked correlation function. Finally, we quantify the breakdown of the 1-halo model at large radii.
+
+\subsection{Recovery of Halo Occupation Distribution parameters}
+We first applied our maximum likelihood estimation (MLE) framework to the baseline model, where the satellite radial concentration, $\alpha_c$, is assumed to be constant with halo mass. The goal was to recover the HOD parameters governing the mean number of satellites, $\langle N_{\text{sat}}(M) \rangle$. The optimization yielded a satellite mass scale of $\log_{10}(M_{\text{sat}}/[M_\odot/h]) = 13.253$ and a power-law index of $\alpha_{\text{sat}} = 1.103$. These values are in close agreement with the ground truth parameters used to generate the synthetic catalog, which were $\log_{10}(M_{\text{sat}}) = 13.0$ and $\alpha_{\text{sat}} = 1.0$.
+
+The recovered parameters exhibit a slight positive bias relative to the true values. This small, systematic offset is an expected consequence of modeling a discrete point process over a continuous and steeply falling halo mass function, combined with the selection effects imposed by the radial truncation used to isolate the 1-halo term. Within finite mass bins, the effective mean mass is skewed towards the lower boundary, causing the likelihood to prefer a slightly higher mass threshold $M_{\text{sat}}$. Despite this minor bias, the MLE approach effectively recovers the fundamental scaling of satellite occupation with halo mass directly from the 3D galaxy positions.
+
+Figure \ref{fig:image0} compares the empirical satellite radial density profiles with our best-fit model and the true underlying model across four host halo mass bins. The recovered exponential profile (red solid line) provides an excellent fit to the data points from the synthetic catalog. The figure also visually confirms the parameter bias, as the best-fit model consistently predicts a slightly higher satellite density than the true data-generating model (blue dashed line).
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../input_files/plots/step_3_satellite_radial_profiles_1_20260414_163828.png}
+    \caption{Radial density profiles of satellite galaxies, shown for four distinct host halo mass bins. The empirical profiles from the synthetic catalog (black points with error bars) are compared against the true data-generating model (blue dashed line) and the best-fit exponential model recovered via maximum likelihood estimation (red solid line). The recovered model provides a strong fit to the data across all mass scales, but exhibits a systematic offset above the true model, visually representing the slight positive bias in the recovered Halo Occupation Distribution parameters, $M_{\text{sat}}$ and $\alpha_{\text{sat}}$.}
+    \label{fig:image0}
+\end{figure}
+
+\subsection{Evidence for a mass-dependent satellite concentration}
+A key objective of this work was to test the common assumption of self-similarity in satellite radial profiles. We compared the baseline constant-concentration model ($\alpha_c(M) = \alpha_0$) with a more complex model where the concentration parameter varies as a power-law with host halo mass, $\alpha_c(M) = \alpha_0 (M/M_{\text{pivot}})^\beta$. We used the Akaike Information Criterion (AIC) for model selection, which penalizes models for additional parameters.
+
+The constant-$\alpha_c$ model yielded a maximum log-likelihood of $\ln(\mathcal{L}) = 340,132.53$, corresponding to an AIC of $-680,259.06$. In contrast, the mass-dependent model achieved a significantly higher log-likelihood of $\ln(\mathcal{L}) = 340,201.60$, resulting in a lower AIC of $-680,395.20$. The difference, $\Delta \text{AIC} = \text{AIC}_{\text{const}} - \text{AIC}_{\text{mass-dep}} = 136.14$, provides decisive statistical evidence in favor of the mass-dependent model. This indicates that the additional parameter is well-justified and that the assumption of a constant satellite concentration is a poor description of the data.
+
+The best-fit parameters for this preferred model were $\log_{10}(M_{\text{sat}}) = 13.252$, $\alpha_{\text{sat}} = 1.102$, $\alpha_0 = 3.382$, and a mass-dependence exponent of $\beta = 0.035$. The positive value of $\beta$ reveals a subtle but statistically significant trend: more massive halos host more centrally concentrated satellite populations relative to their virial radius. This finding challenges the assumption of strict self-similarity in the spatial distribution of satellite galaxies. The left panel of Figure \ref{fig:image2} illustrates this result, showing the recovered concentration parameter $\alpha_c(M)$ increasing with host halo mass.
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=\textwidth]{../input_files/plots/step_5_model_comparison_residuals_1_20260414_164420.png}
+    \caption{Left: The recovered concentration parameter of the satellite radial profile, $\alpha_c(M)$, as a function of host halo mass, $M_{\text{vir}}$. The analysis shows a decisive statistical preference ($\Delta \text{AIC} \approx 136$) for the mass-dependent model (red solid line), which indicates that more massive halos host more concentrated satellite distributions, over the constant-concentration model (blue dashed line). Right: The fractional residual, $(O-E)/E$, between the observed (O) and expected (E) satellite counts for the preferred mass-dependent model in the transition region between the 1-halo and 2-halo regimes. The dramatic increase in residuals at distances beyond $\sim$5 Mpc/h demonstrates the fundamental breakdown of the isolated 1-halo model, which severely underpredicts galaxy counts by neglecting the 2-halo contribution from clustered neighboring halos.}
+    \label{fig:image2}
+\end{figure*}
+
+\subsection{Spatial segregation of luminous galaxies}
+To investigate the relationship between galaxy luminosity and spatial position within halos, we computed the marked correlation function, $M(r)$, using luminosity as the mark. By normalizing $M(r)$ with the result from a shuffled catalog, $M_{\text{shuffled}}(r)$, we isolate the signal of spatial-luminosity segregation from the underlying galaxy clustering and luminosity distribution.
+
+The results are shown in Figure \ref{fig:image1}. In the 1-halo regime ($r < 5$ Mpc/h, left panel), the ratio $M(r)/M_{\text{shuffled}}(r)$ is significantly greater than unity at small separations ($r \leq 1$ Mpc/h). This indicates that galaxy pairs at small separations, which are predominantly central-satellite pairs, have a higher mean luminosity product than random pairs. This is a direct consequence of the HOD construction where central galaxies are systematically more luminous than their satellites and reside at the halo center. This result quantifies the strong luminosity segregation present within the halos.
+
+Conversely, in the 2-halo regime ($r > 10$ Mpc/h, right panel), the ratio is consistent with unity at all scales. This demonstrates that for galaxies residing in separate, uncorrelated halos, there is no correlation between their luminosities and their spatial separation, as expected.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{../input_files/plots/step_4_marked_correlation_1776184816.png}
+    \caption{The luminosity-marked correlation function ratio, $M(r)/M_{\text{shuffled}}(r)$, for the 1-halo ($r < 5$ Mpc/h, left panel) and 2-halo ($r > 10$ Mpc/h, right panel) regimes. In the 1-halo regime, the ratio is significantly greater than unity at small separations, which demonstrates strong spatial-luminosity segregation arising from the pairing of systematically brighter central galaxies with fainter satellites. In the 2-halo regime, the ratio is consistent with unity, confirming that galaxy luminosities are spatially uncorrelated on large scales where galaxy pairs reside in distinct, independent halos.}
+    \label{fig:image1}
+\end{figure}
+
+\subsection{Breakdown of the 1-halo model at large radii}
+Our Neyman-Scott process model is designed to describe the 1-halo regime, implicitly assuming that halo centers (the parent points) follow a homogeneous Poisson process, i.e., they are independent and randomly distributed. To test the limits of this assumption, we performed a residual analysis by comparing the observed number of galaxies ($O$) to the number predicted by our best-fit model ($E$) in the radial range $5 < r < 10$ Mpc/h, a region excluded from the likelihood fit.
+
+The right panel of Figure \ref{fig:image2} shows the fractional residual, $(O-E)/E$, as a function of radial distance. The residuals are close to zero near the fitting boundary ($r=5$ Mpc/h) but grow dramatically at larger radii. In this transition region, the observed number of galaxies (362) far exceeds the model prediction (5.6). This massive underprediction by the model signifies the breakdown of the isolated 1-halo approximation. At these scales, the galaxy distribution is no longer dominated by the profile of a single host halo but by the contribution from galaxies in neighboring, clustered halos. This residual analysis precisely quantifies the scale at which the 2-halo term becomes dominant, highlighting the necessity of incorporating halo-halo clustering into any point process model intended to describe the full galaxy distribution.
+
+\end{document}
+                

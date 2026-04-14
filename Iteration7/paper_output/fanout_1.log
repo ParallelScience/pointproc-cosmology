@@ -1,0 +1,85 @@
+
+###### PROMPT BEGINS ########
+System: You are a scientist
+Human: You are provided with:
+- a report on the results of a project. 
+- a plot from the analysis of the project.
+Your task is to create a caption for the plot that will be placed in the results section of a scientific paper. 
+
+Follow these instructions:
+- Write the caption in LaTeX
+- Describe what the plot is showing and relate it to the context below
+- Use the context below to relate the content of the caption to the results section
+- Do not refer to any section or subsection in the text
+- Try to describe what we learn from the image
+- Write the caption to be as short as possible while keeping its content
+- Do not make up anything. The caption should be a description of the plot based on the context below.
+- The caption must be a single paragraph.
+- When writing the caption, take into account that the underscore symbol needs to be written as \_, otherwise it wont compile in LaTeX.
+- Caption must not include tables.
+- If using percentage symbols, use \% instead of %
+
+Context:
+# Results and Discussion: Disentangling Satellite Radial Profiles via Mass-Conditioned Stochastic Modeling
+
+## 1. Forward Modeling and Recovery of Halo Occupation Distribution Parameters
+
+The primary objective of our mass-conditioned stochastic modeling was to isolate the 1-halo satellite distribution and recover the underlying Halo Occupation Distribution (HOD) parameters directly from the spatial point pattern of galaxies. Traditional cosmological analyses rely heavily on global summary statistics, such as the two-point correlation function (2PCF) $\xi(r)$ or the projected correlation function $w_p(r_p)$. While powerful, these summary statistics inherently compress the spatial information, averaging over the complex, mass-dependent internal structures of dark matter halos. By employing a rigorous Poisson-likelihood framework grounded in spatial point process theory, we modeled the expected satellite counts $\lambda(r | M, \theta)$ as a continuous function of host halo mass $M_{vir}$ and radial distance $r$.
+
+The maximum likelihood estimation (MLE) was performed across an aggregated dataset comprising 10 independent realizations, encompassing over 68,000 satellite galaxies and 20,000 massive halos ($M_{vir} \ge 10^{13} M_\odot/h$). For the baseline constant-concentration model, the optimization recovered a satellite mass scale of $\log_{10}(M_{sat}/[M_\odot/h]) = 13.253$ and a power-law index of $\alpha_{sat} = 1.103$. These values can be directly compared against the ground truth parameters of the synthetic catalog's data-generating process, which were set to $\log_{10}(M_{sat}) = 13.0$ and $\alpha_{sat} = 1.0$.
+
+The recovered parameters demonstrate a strong qualitative and quantitative agreement with the true underlying model, successfully capturing the fundamental scaling of satellite occupation with halo mass. However, the optimization reveals a slight positive bias in both $M_{sat}$ and $\alpha_{sat}$. This systematic offset can be attributed to several interacting factors inherent to the spatial modeling of discrete point processes. First, the integration over the halo mass function within finite mass bins introduces a mild Eddington-like bias; because the halo mass function $dN/d\ln M$ decays exponentially at the high-mass end, the effective mean mass within any given bin is skewed towards the lower boundary. The likelihood model compensates for this steepness by slightly elevating the preferred $M_{sat}$ threshold. Second, the explicit inclusion of a selection function $S(r)$ to model halo exclusion and the hard truncation applied at $r = 5$ Mpc/h to mitigate 2-halo contamination subtly alters the normalization of the expected satellite counts. Despite these minor biases, the MLE approach proves highly effective at extracting the HOD parameters without the need for computationally expensive N-body simulation forward-modeling or simulation-based inference, validating the utility of analytical point process likelihoods in cosmological parameter estimation.
+
+## 2. Mass-Dependent Concentration and Information Criteria
+
+A central hypothesis tested in this study was whether the spatial distribution of satellites within halos exhibits a mass-dependent concentration. In standard $\Lambda$CDM cosmology, the dark matter density profile of halos (e.g., the Navarro-Frenk-White profile) exhibits a concentration-mass relation, where less massive halos are typically more concentrated because they assembled earlier in the universe when the background density was higher. To test if a similar structural variation exists in the synthetic galaxy distribution, we parameterized the exponential radial profile scale using a mass-dependent concentration parameter: $\alpha_c(M) = \alpha_0 (M/M_{pivot})^\beta$, where $M_{pivot} = 10^{13} M_\odot/h$. We compared this extended model against the baseline constant-$\alpha_c$ model using the Akaike Information Criterion (AIC) to rigorously penalize for the additional degree of freedom.
+
+The statistical comparison yielded unambiguous results. The constant-$\alpha_c$ model resulted in a negative log-likelihood (NLL) of -340,132.53, corresponding to an AIC of -680,259.06, with a best-fit concentration parameter of $\alpha_0 = 3.631$. In contrast, the mass-dependent model achieved an NLL of -340,201.60 and an AIC of -680,395.20. The resulting difference, $\Delta \text{AIC} = 136.13$, provides decisive statistical evidence in favor of the mass-dependent concentration model. According to standard information criteria thresholds, a $\Delta \text{AIC} > 10$ is considered strong evidence against the null model; a value exceeding 130 indicates that the constant-concentration assumption is highly inadequate for describing the data.
+
+The recovered parameters for this preferred mass-dependent model were $\log_{10}(M_{sat}) = 13.252$, $\alpha_{sat} = 1.102$, $\alpha_0 = 3.382$, and a mass-dependence exponent of $\beta = 0.035$. The positive value of $\beta$ indicates a subtle but statistically significant trend: more massive halos in this synthetic catalog exhibit a slightly more concentrated satellite distribution relative to their virial radius than less massive halos. In the context of the Neyman-Scott point process, this implies that the spatial kernel governing the placement of offspring (satellites) around the parent points (halo centers) is not strictly self-similar across the mass spectrum.
+
+Physically, this deviation from self-similarity reflects the specific implementation of the HOD in the data-generating process, where satellite positions are drawn from an exponential profile scaled strictly by $R_{vir}$. Because $R_{vir} \propto M^{1/3}$, the physical extent of the satellite distribution grows with mass. The likelihood framework, by detecting a non-zero $\beta$, captures the nuanced interplay between the fixed exponential functional form and the varying boundary conditions imposed by the halo mass function. The decisive $\Delta \text{AIC}$ underscores the extreme sensitivity of likelihood-based point process modeling; even subtle deviations from self-similarity in the spatial kernel can be robustly detected when leveraging the full unbinned 3D spatial information of the 1-halo regime.
+
+## 3. Marked Correlation Function and Spatial-Luminosity Segregation
+
+To further disentangle the internal structure of the halos and move beyond purely geometric spatial statistics, we computed the marked correlation function $M(r)$, utilizing galaxy luminosity as the mark. In the framework of marked point processes, $M(r)$ isolates the correlation between the spatial positions of points and their internal properties. It is defined as the mean product of marks for pairs separated by distance $r$, normalized by the expected product if the marks were randomly shuffled across the existing spatial coordinates ($M_{shuffled}(r)$). This normalization ensures that $M(r)$ measures purely the spatial segregation of the marks, independent of the underlying unmarked spatial clustering $\xi(r)$ and the global mark distribution.
+
+In the 1-halo regime ($r < 5$ Mpc/h), the marked correlation ratio $M(r)/M_{shuffled}(r)$ provides a direct probe of luminosity segregation within the dark matter halos. The synthetic catalog generation dictates a strict hierarchical luminosity assignment: central galaxies are systematically brighter than satellites, with satellite luminosities drawn from a log-normal distribution centered 0.5 dex below the central galaxy's luminosity. Consequently, at very small radial distances ($r \lesssim 1$ Mpc/h), the point pairs are predominantly central-satellite pairs. Because the central galaxy is fixed at the halo center and possesses a higher luminosity mark, the product of the marks for these close pairs is systematically higher than the average pair product across the catalog. This manifests as a marked correlation ratio significantly greater than unity at small scales.
+
+As the radial distance increases towards the virial radius, the pairs become increasingly dominated by satellite-satellite combinations. Since satellites are systematically fainter, the mark product drops, and the marked correlation function asymptotically approaches unity. This behavior perfectly mirrors the physical effects of dynamical friction in real galaxy clusters, where massive, luminous galaxies lose orbital energy and sink to the center of the potential well, creating a luminosity-segregated core.
+
+In the 2-halo regime ($r > 10$ Mpc/h), the marked correlation function is expected to be largely featureless and consistent with unity, as the pairs consist of galaxies residing in distinct, uncorrelated halos. The empirical results from our analysis confirm this theoretical expectation, demonstrating that the luminosity marks are spatially independent on large scales. The marked point process analysis thus successfully validates the hierarchical luminosity assignment of the HOD model. It proves that the inclusion of marks in spatial point process models can effectively break degeneracies between central and satellite populations—populations that are otherwise indistinguishable in the unmarked 2PCF—providing a powerful diagnostic for the physics of galaxy assembly.
+
+## 4. Residual Mapping and the Breakdown of the Neyman-Scott Kernel
+
+A critical component of our analysis was evaluating the validity of the Neyman-Scott kernel in describing the transition from the 1-halo to the 2-halo regime. The Neyman-Scott process (specifically, the Thomas cluster process variant used here) models spatial clustering as a superposition of independent clusters. While this is an excellent approximation for the internal structure of halos ($r < 5$ Mpc/h), it inherently assumes that the parent points (halo centers) are distributed according to a homogeneous Poisson process. This assumption explicitly ignores halo-halo clustering, which is a fundamental prediction of $\Lambda$CDM cosmology.
+
+To quantify the limitations of this assumption, we mapped the residuals between the observed satellite counts and the forward-modeled expectations in the transition region ($r = 5-10$ Mpc/h). The results were striking and definitive: within this radial band, we observed a total of 362 satellites across the analyzed mass bins, whereas the best-fit mass-dependent Neyman-Scott model predicted only 5.6 satellites. This massive underprediction translates to a fractional residual $(O-E)/E$ that is orders of magnitude above zero.
+
+This severe discrepancy highlights the fundamental breakdown of the isolated 1-halo model. At distances of 5-10 Mpc/h, the spatial distribution of galaxies is no longer governed by the exponential radial profile of a single host halo. Instead, the probability of finding a galaxy at this distance is dominated by the presence of neighboring halos. Because dark matter halos are highly biased tracers of the underlying cosmological density field, they are strongly clustered rather than Poisson-distributed. The Neyman-Scott kernel, which forces the satellite density to decay exponentially to zero beyond the virial radius, cannot capture this 2-halo contribution.
+
+The residual mapping thus serves as a direct, quantitative measure of the 2-halo term. The fact that the observed counts exceed the 1-halo prediction by a factor of $\sim 65$ in the transition region demonstrates that any comprehensive point process model of galaxy clustering must incorporate a clustered parent process. To accurately describe the large-scale structure, the homogeneous Poisson parent process must be replaced by a Log-Gaussian Cox Process (LGCP) or a Gibbs point process with an attractive potential, which can naturally model the correlated cosmic web of dark matter halos. The isolated Neyman-Scott model is strictly valid only within the virial radius, and our likelihood framework successfully isolates this regime, preventing the 2-halo clustering from biasing the recovery of the internal HOD parameters.
+
+## 5. Summary and Implications for Cosmological Point Process Modeling
+
+The synthesis of our likelihood estimation, marked correlation analysis, and residual mapping provides a comprehensive validation of the mass-conditioned stochastic modeling approach for galaxy catalogs. By treating the galaxy distribution as a marked spatial point process and conditioning the intensity function on the host halo mass, we were able to extract detailed physical parameters that govern galaxy formation within dark matter halos, bypassing the information loss associated with traditional summary statistics.
+
+### Key Findings:
+1. **Parameter Recovery:** The Poisson-likelihood framework successfully recovered the HOD parameters ($\log_{10} M_{sat} \approx 13.25$, $\alpha_{sat} \approx 1.10$), demonstrating that direct spatial modeling can accurately constrain the physics of satellite galaxy occupation.
+2. **Model Selection:** The decisive preference ($\Delta \text{AIC} = 136.13$) for a mass-dependent concentration model highlights the power of information criteria in guiding model selection for spatial point processes, revealing subtle non-self-similarities in the satellite radial profiles.
+3. **Luminosity Segregation:** The marked correlation function successfully identified the spatial-luminosity segregation imposed by the central-satellite dichotomy, proving that marked point processes can probe the internal kinematics and assembly history of halos.
+4. **Transition Regime Dynamics:** The residual analysis in the transition region ($r = 5-10$ Mpc/h) provided a stark visualization of the boundary between the 1-halo and 2-halo regimes, quantifying the exact scale at which the assumption of independent clusters breaks down and necessitating the use of clustered parent processes like LGCPs for large-scale modeling.
+
+These findings have significant implications for future cosmological surveys, such as DESI, Euclid, and the Rubin Observatory. As observational datasets grow in volume and precision, the statistical tools used to analyze them must evolve accordingly. Moving beyond the standard 2PCF to full likelihood-based point process modeling, incorporating marks such as luminosity, color, or stellar mass, and explicitly modeling the mass-dependence of spatial kernels will be crucial. This framework not only provides tighter constraints on cosmological parameters by utilizing all available spatial information but also offers deeper insights into the complex astrophysical processes governing galaxy formation and evolution across cosmic time.
+            
+**Respond in exactly this format**
+
+\\begin{Caption}
+<Caption>
+\\end{Caption}
+
+In <Caption> place the figure caption.
+
+###### PROMPT ENDS ########
+
+content='\\begin{Caption}\nThe luminosity-marked correlation function ratio, $M(r)/M\\_{shuffled}(r)$, for the 1-halo ($r < 5$ Mpc/h, left panel) and 2-halo ($r > 10$ Mpc/h, right panel) regimes. In the 1-halo regime, the ratio is significantly greater than unity at small separations, which demonstrates strong spatial-luminosity segregation arising from the pairing of systematically brighter central galaxies with fainter satellites. In the 2-halo regime, the ratio is consistent with unity, confirming that galaxy luminosities are spatially uncorrelated on large scales where galaxy pairs reside in distinct, independent halos.\n\\end{Caption}' additional_kwargs={} response_metadata={'finish_reason': 'STOP', 'model_name': 'gemini-2.5-pro', 'safety_ratings': [], 'model_provider': 'google_genai'} id='lc_run--019d8cfd-fb7a-7191-8757-48fbe8b84063-0' tool_calls=[] invalid_tool_calls=[] usage_metadata={'input_tokens': 3424, 'output_tokens': 1492, 'total_tokens': 4916, 'input_token_details': {'cache_read': 0}, 'output_token_details': {'reasoning': 1342}}

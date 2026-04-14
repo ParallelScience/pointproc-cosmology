@@ -1,0 +1,37 @@
+LaTeX Compilation Errors Found:
+
+! Undefined control sequence.
+l.44 ...an unity at small separations ($r \lesssim
+1$ Mpc/h). This indicates...
+
+? [2] [3]
+
+LaTeX Warning: Reference `fig:image2' on page 4 undefined on input line 58.
+
+[4] (./Results.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+! Undefined control sequence.
+l.44 ...an unity at small separations ($r \lesssim
+1$ Mpc/h). This indicates...
+
+?
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[3]
+
+LaTeX Warning: Reference `fig:image2' on page 4 undefined on input line 58.
+
+[4] (./Results_refined.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+

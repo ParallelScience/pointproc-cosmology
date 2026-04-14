@@ -1,0 +1,20 @@
+\documentclass[]{article}
+
+\usepackage{amsmath}
+\usepackage{multirow}
+\usepackage{natbib}
+\usepackage{graphicx} 
+
+
+\begin{document}
+
+The spatial distribution of galaxies provides a crucial observational window into the large-scale structure of the universe. Within the standard cosmological framework, galaxies form and evolve inside the gravitational potential wells of dark matter halos, which constitute the dense nodes of the cosmic web. The Halo Occupation Distribution (HOD) is a powerful statistical model that describes this fundamental connection, specifying the probability that a halo of a given mass hosts a certain number of galaxies and prescribing their spatial arrangement. Constraining the HOD is therefore essential for both understanding the physics of galaxy formation and for using galaxy surveys to infer cosmological parameters.
+
+Traditionally, HOD parameters are inferred by fitting summary statistics, such as the two-point correlation function, to observational data. While this approach has been highly successful, it compresses the full three-dimensional information of a galaxy catalog into lower-dimensional statistics. This averaging process can obscure important, mass-dependent details about the internal structure of halos. For example, many models assume that the radial profile of satellite galaxies is self-similar, following a universal form when scaled by the halo virial radius, independent of the host halo's mass. Such an assumption simplifies the model but may mask underlying physical processes like dynamical friction or tidal stripping, which vary across the halo mass spectrum and directly shape the satellite population. Testing these foundational assumptions requires methods that are more sensitive to the detailed structure within individual halos.
+
+In this paper, we move beyond summary statistics to directly model the spatial distribution of galaxies as a mass-conditioned spatial point process. This approach bypasses the information loss inherent in spatial averaging by constructing a likelihood function based on the individual three-dimensional positions of galaxies. By conditioning the model on the properties of host dark matter halos, we can directly probe the rules governing how satellite galaxies are distributed within them. This allows for a more granular and powerful test of the physical assumptions embedded in standard halo models, as we can explicitly model the conditional satellite radial profile, $n(r|M)$, and test for its dependence on halo mass, $M$.
+
+We apply our framework, based on a Neyman-Scott process, to a suite of synthetic galaxy catalogs where the underlying HOD parameters are known. Through a maximum likelihood estimation, we first demonstrate our ability to recover the input parameters that govern the satellite galaxy population, thereby validating our method. We then use this framework to explicitly test the hypothesis that the radial concentration of satellite galaxies depends on the mass of their host halo, a direct challenge to the assumption of self-similarity. Furthermore, we employ a marked correlation function, using galaxy luminosity as the mark, to quantify the spatial segregation of galaxies within their halos, a potential signature of their orbital evolution. This work establishes that direct likelihood-based modeling of spatial point patterns is a powerful tool for extracting detailed astrophysical information from galaxy catalogs, offering a robust alternative for analyzing the rich datasets from next-generation cosmological surveys.
+
+\end{document}
+                
