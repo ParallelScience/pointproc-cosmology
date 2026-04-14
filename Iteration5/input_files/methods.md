@@ -1,0 +1,15 @@
+1. **Data Pre-processing and Halo-Galaxy Association**: Load the 10 realizations of galaxy and halo catalogs. For each galaxy, identify its host halo using the `ln_M_h` field and spatial proximity. Create a lookup table mapping every satellite to its parent halo's center and virial radius ($R_{vir}$).
+
+2. **Large-Scale Bias Estimation**: Calculate the halo-halo correlation function $\xi_{hh}(r)$ and the galaxy-halo cross-correlation function $\xi_{gh}(r)$. Estimate the large-scale bias $b(M)$ using the ratio $\sqrt{\xi_{gh}(r) / \xi_{hh}(r)}$ specifically in the regime $r > 20$ Mpc/h to ensure the 1-halo term does not contaminate the linear bias measurement.
+
+3. **Power Spectrum Validation**: Compute the 3D Power Spectrum $P(k)$ for the galaxy distribution and the halo distribution $P_{hh}(k)$ using a $256^3$ grid with the Cloud-in-Cell (CIC) scheme. Compare $P_{hh}(k)$ against the theoretical linear power spectrum $P_{lin}(k)$ scaled by the halo bias to verify the parent process. Compare galaxy $P(k)$ against a Poisson null model to quantify the clustering signal versus shot noise at high $k$.
+
+4. **Assembly Bias Isolation via Shuffling**: Create a "shuffled" version of each galaxy catalog. For every host halo, preserve the number of satellites and their radial distance $r$ from the halo center, but randomize their angular positions ($\theta, \phi$) independently for each satellite. This isolates the effect of the radial distribution from any potential satellite-satellite angular alignments.
+
+5. **Marked Correlation Analysis**: Compute the marked correlation function $M(r)$ for both the original and shuffled catalogs, using the luminosity offset relative to the central galaxy as the mark. Compare $M(r)$ in the 1-halo regime ($r < 5$ Mpc/h) to determine if assembly bias is an emergent property of the HOD's luminosity-mass assignment.
+
+6. **Radial Profile Diagnostic**: Calculate the empirical 3D radial density profile $\rho(r)$ for satellites relative to their host centers. Compare this against the theoretical $P(r) \propto r^2 \exp(-r/R_{vir})$ to quantify the magnitude of the sampling error. Define $r_{limit}$ as the scale where the empirical $\xi(r)$ deviates significantly from the theoretical 2-halo prediction.
+
+7. **Statistical Aggregation**: Aggregate the bias $b(M)$, power spectrum residuals, and marked correlation coefficients across all 10 realizations. Use bootstrap resampling across the 10 realizations to compute robust mean values and variance estimates for these metrics.
+
+8. **Reliability Threshold Definition**: Synthesize the results to define the "Reliability Threshold" for the dataset. Explicitly document the range of scales ($r > r_{limit}$) and the specific statistics (e.g., $P(k)$ at $k < 0.1$ h/Mpc) where the catalog is robust for cosmological inference, distinguishing these from the 1-halo regime where sampling effects dominate.
