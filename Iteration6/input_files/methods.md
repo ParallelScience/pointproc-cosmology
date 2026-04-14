@@ -1,0 +1,15 @@
+1. **Data Preparation and Halo-Satellite Partitioning**: Load the 10 galaxy and halo catalogs. For each galaxy, use the `ln_M_h` field to match it to the corresponding host halo in the `halo_catalog`. Create a structured array storing host halo mass ($M_{vir}$), virial radius ($R_{vir}$), and the 3D distance vector from the host center for each satellite. Filter the dataset to isolate halos with $M > 10^{13} M_\odot/h$ to focus exclusively on the 1-halo regime ($r < 5$ Mpc/h).
+
+2. **Empirical Radial Profile Extraction**: Compute the empirical 3D radial density profile $n(r|M_{vir})$ by binning satellite positions relative to their host centers. Normalize these profiles by the number of host halos in specific mass bins. Calculate the mean and variance of these profiles across the 10 realizations to establish the baseline empirical distribution.
+
+3. **Analytic Model Construction**: Define the theoretical 1-halo satellite distribution using the profile $\rho(r) \propto r^{-2} \exp(-r / (\alpha \cdot R_{vir}))$, where the concentration parameter $\alpha$ is fixed at the structural constant $0.113$. This model will be used to generate the theoretical 1-halo correlation function $\xi_{1h}(r)$ for comparison against the empirical data.
+
+4. **Parameter Recovery via Likelihood Estimation**: Perform a maximum likelihood estimation (MLE) or grid search to recover the HOD parameters ($M_{min}, \alpha_{sat}$). Compare the recovered values against the known ground truth to quantify the accuracy of the spatial implementation. Conduct this fit both with $\alpha$ fixed at $0.113$ and as a free parameter to assess the systematic bias introduced by the concentration assumption.
+
+5. **Marked Correlation Analysis**: Define the marks as $m_i = L_i / \langle L \rangle$ for each satellite. Compute the marked correlation function $M(r)$ within the 1-halo regime ($r < 5$ Mpc/h). Compare the clustering of high-luminosity satellites versus low-luminosity satellites to determine if the luminosity-mass assignment introduces spatial bias within the halo.
+
+6. **Information Content Quantification**: Quantify the marginal utility of the marked correlation function by comparing the variance of the posterior distributions of $M_{sat}$ obtained from the standard 2PCF alone versus the joint 2PCF + $M(r)$ analysis. This determines if luminosity marks provide additional statistical power to break degeneracies between halo mass and satellite occupation.
+
+7. **1-Halo Residual Analysis**: Calculate the difference between the observed 1-halo clustering and the analytic model derived in Step 3. Use this residual to quantify modeling errors or "missing physics" specifically within the 1-halo regime, providing a metric for the limitations of the Neyman-Scott kernel.
+
+8. **Statistical Aggregation and Robustness Testing**: Aggregate the results across all 10 realizations. Use the variance between realizations to define confidence intervals for the recovered HOD parameters and the marked correlation statistics, ensuring the findings are robust against the stochastic nature of the synthetic catalog generation.
