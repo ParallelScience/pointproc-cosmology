@@ -1,0 +1,9 @@
+The observed failures and biases in the analysis are directly attributable to constraints described in the dataset:
+
+1. **Jensen's Inequality and Binning Bias**: The analysis reports a systematic bias in $M_{sat}$ and $\alpha_{sat}$ recovery. This is explained by the dataset's use of a steeply declining halo mass function ($dN/d\ln M \propto M^{0.3} \exp(-M/M_*)$). Aggregating halos into wide logarithmic bins, as required by the research plan, causes the mean mass of a bin to be weighted toward the lower boundary, leading to an underestimation of satellite counts when using continuous HOD formulas.
+
+2. **Boundary and Truncation Effects**: The recovered radial scale parameter ($\alpha = 0.808$) deviates from the input ($\alpha = 1.0$). This is explained by the dataset's generation process, which uses a finite, periodic 500 Mpc/h box. The continuous exponential radial profile has infinite support, and the empirical matching algorithm (associating satellites with the nearest halo) biases the distribution against large-separation outliers, effectively truncating the profile.
+
+3. **Discrete vs. Continuous Modeling**: The high residuals (48.4%) in the low-mass bin (Bin 0) are explained by the dataset's HOD parameters. The HOD produces a low mean satellite occupation ($\sim 1.177$) for these halos. The dataset's reliance on a continuous Neyman-Scott kernel is fundamentally incompatible with this discrete, Poisson-dominated regime, where the "fluid" assumption of the kernel breaks down.
+
+4. **Luminosity Mark Interpretation**: The "violent" rejection of the null hypothesis in the marked correlation function ($M(r) \gg 1$) is explained by the dataset's HOD structure: satellite galaxies only exist in halos with $M > 10^{13} M_\odot/h$, while the global mean luminosity $\langle L \rangle$ is dominated by faint central galaxies in low-mass halos. The marked correlation is thus constrained by the dataset's specific mass-dependent luminosity assignment.
