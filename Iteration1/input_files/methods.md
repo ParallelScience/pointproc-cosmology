@@ -1,0 +1,15 @@
+1. **Halo Distribution Diagnostics**: Calculate Ripley’s K-function and the L-function for the halo catalog to characterize the parent process. Compare these against a Complete Spatial Randomness (CSR) null model to quantify residual clustering or exclusion zones in the halo distribution, establishing the baseline for the Neyman-Scott cluster process.
+
+2. **Void Probability Function (VPF) and Hierarchy**: Compute the empirical VPF, $P_0(r)$, for the galaxy catalogs (1–30 Mpc/h). Compare the empirical results against the theoretical VPF derived for a Neyman-Scott process to quantify "leakage" between the 1-halo and 2-halo regimes, identifying where the HOD implementation deviates from the ideal cluster model.
+
+3. **Local Gibbs Process (Strauss Model)**: Implement a Strauss point process model restricted strictly to the 1-halo regime (within individual host halos with $M > 10^{13} M_\odot/h$). Estimate interaction parameters (repulsion radius and strength) for satellite-satellite pairs to quantify the "soft-core" exclusion zone created by dynamical constraints, ensuring the model is computationally focused on local halo environments.
+
+4. **Conditional Intensity and Mark Independence**: Test for spatial-mark independence by modeling the intensity as a separable function $\lambda(x, m) = \lambda_{spatial}(x) \times f(m|x)$. Use the Spearman rank correlation to determine if the luminosity mark $f(m|x)$ deviates from the global mean as a function of halo-centric distance, thereby assessing if the luminosity provides additional spatial information beyond the halo mass.
+
+5. **J-function Analysis**: Compute the J-function, $J(r) = (1-G(r))/(1-F(r))$, for the galaxy catalog. Compare the J-function of the full catalog against a "shuffled" catalog where satellite positions are randomly redistributed within their host halos. This comparison isolates whether non-randomness is a byproduct of the HOD radial profile or actual dynamical interactions.
+
+6. **Statistical Aggregation and Covariance**: Aggregate the VPF, K-function, J-function, and Gibbs parameters across the 10 realizations. Use Jackknife or Bootstrap resampling on these realizations to compute robust covariance matrices, ensuring that identified deviations from the Neyman-Scott model are statistically significant.
+
+7. **Joint Analysis of Deviations**: Perform a joint analysis of the computed statistics to determine if the "leakage" identified in the VPF correlates with the "repulsion" parameters identified in the Gibbs model. This step links the global clustering hierarchy to local dynamical exclusion effects.
+
+8. **Synthesis of Results**: Synthesize findings to document the limitations of the Neyman-Scott assumption. Report on the effective repulsion radii, the validity of the separable intensity model, and the degree of hierarchy leakage, providing a comprehensive assessment of the galaxy distribution's complexity relative to the input HOD parameters.
